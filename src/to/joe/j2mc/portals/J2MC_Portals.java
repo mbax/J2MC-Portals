@@ -1,5 +1,6 @@
 package to.joe.j2mc.portals;
 
+import java.io.File;
 import java.util.HashSet;
 
 import org.bukkit.Location;
@@ -13,8 +14,9 @@ public class J2MC_Portals extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.getConfig().options().copyDefaults(true);
-        this.saveConfig();
+        if(!(new File(this.getDataFolder(),"config.yml")).exists()){
+            this.saveDefaultConfig();
+        }
         
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
         this.loadPortalAreas();

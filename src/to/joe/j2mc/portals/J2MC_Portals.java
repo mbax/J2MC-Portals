@@ -1,6 +1,7 @@
 package to.joe.j2mc.portals;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.permissions.Permission;
@@ -29,7 +30,7 @@ public class J2MC_Portals extends JavaPlugin {
             int z = this.getConfig().getInt(path + ".z");
             Location upperLeft = new Location(this.getServer().getWorlds().get(0), x, y, z);
             
-            ArrayList<Location> locations = new ArrayList<Location>();
+            HashSet<Location> locations = new HashSet<Location>();
             //TODO load all the locations from the map
             
             String destination = area;
@@ -42,10 +43,10 @@ public class J2MC_Portals extends JavaPlugin {
         }
     }
     
-    public ArrayList<Location> getAllLocations() {
-        ArrayList<Location> return_ = new ArrayList<Location>();
+    public HashSet<Location> getAllLocations() {
+        HashSet<Location> return_ = new HashSet<Location>();
         for(PortalArea area : this.portalAreas) {
-            for(Location loc : area.locations) {
+            for(Location loc : area.getLocations()) {
                 return_.add(loc);
             }
         }

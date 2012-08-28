@@ -22,13 +22,14 @@ public class J2MC_Portals extends JavaPlugin {
     public void loadPortalAreas() {
         for(String area : this.getConfig().getStringList("portals")) {
             String path = "portals." + area;
-            ArrayList<Location> locations = new ArrayList<Location>();
-            //TODO load all the locations from the map
-            
             int x = this.getConfig().getInt(path + ".x");
             int y = this.getConfig().getInt(path + ".y");
             int z = this.getConfig().getInt(path + ".z");
             Location upperLeft = new Location(this.getServer().getWorlds().get(0), x, y, z);
+            
+            ArrayList<Location> locations = new ArrayList<Location>();
+            //TODO load all the locations from the map
+            
             String destination = area;
             String perm = this.getConfig().getString(path + ".permission");
             

@@ -34,7 +34,9 @@ public class J2MC_Portals extends JavaPlugin {
             
             String destination = area;
             String perm = this.getConfig().getString(path + ".permission");
-            this.getServer().getPluginManager().addPermission(new Permission("perm",PermissionDefault.OP));
+            if(perm.equals("j2mc.portals.everyone")) {
+                this.getServer().getPluginManager().addPermission(new Permission("perm",PermissionDefault.OP));
+            }
             
             this.portalAreas.add(new PortalArea(locations, destination, perm, upperLeft));
         }

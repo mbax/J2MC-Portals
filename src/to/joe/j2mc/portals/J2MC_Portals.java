@@ -3,6 +3,8 @@ package to.joe.j2mc.portals;
 import java.util.ArrayList;
 
 import org.bukkit.Location;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class J2MC_Portals extends JavaPlugin {
@@ -32,6 +34,7 @@ public class J2MC_Portals extends JavaPlugin {
             
             String destination = area;
             String perm = this.getConfig().getString(path + ".permission");
+            this.getServer().getPluginManager().addPermission(new Permission("perm",PermissionDefault.OP));
             
             this.portalAreas.add(new PortalArea(locations, destination, perm, upperLeft));
         }

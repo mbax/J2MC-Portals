@@ -9,17 +9,32 @@ public class PortalArea {
     private HashSet<Location> locations;
     private String destination;
     private String permission;
-    private Location upperLeft;
     
     public PortalArea(HashSet<Location> locations, String destination, String permission, Location upperLeft) {
         this.locations = locations;
         this.destination = destination;
         this.permission = permission;
-        this.upperLeft = upperLeft;
     }
     
     public HashSet<Location> getLocations() {
         return this.getLocations();
+    }
+    
+    public boolean isLocationInPortal(Location loc) {
+        for(Location location : locations) {
+            if(loc.equals(location)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public String getDestination(){
+        return this.destination;
+    }
+    
+    public String getPermission(){
+        return this.permission;
     }
 
 }

@@ -43,6 +43,15 @@ public class J2MC_Portals extends JavaPlugin {
         }
     }
     
+    public PortalArea getPortalForLocation(Location loc) {
+        for(PortalArea area : this.portalAreas){
+            if(area.isLocationInPortal(loc)){
+                return area;
+            }
+        }
+        return null;
+    }
+    
     public HashSet<Location> getAllLocations() {
         HashSet<Location> return_ = new HashSet<Location>();
         for(PortalArea area : this.portalAreas) {

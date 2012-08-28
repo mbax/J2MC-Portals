@@ -21,12 +21,7 @@ public class PortalArea {
     }
     
     public boolean isLocationInPortal(Location loc) {
-        for(Location location : locations) {
-            if(loc.equals(location)){
-                return true;
-            }
-        }
-        return false;
+        return locations.contains(loc);
     }
     
     public String getDestination(){

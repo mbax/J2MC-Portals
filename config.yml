@@ -1,0 +1,11 @@
+portals:
+  example:
+    shape: |
+      XXOXX
+      XOOOX
+      XOOOX
+      XXXXX
+    x: 100
+    y: 70
+    z: 100
+    permission: portal.example

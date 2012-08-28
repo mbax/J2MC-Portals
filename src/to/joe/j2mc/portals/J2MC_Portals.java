@@ -1,6 +1,5 @@
 package to.joe.j2mc.portals;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.bukkit.Location;
@@ -10,15 +9,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class J2MC_Portals extends JavaPlugin {
 
-    public EventListener listener;
-    public ArrayList<PortalArea> portalAreas;
+    public final HashSet<PortalArea> portalAreas = new HashSet<PortalArea>();
 
     @Override
     public void onEnable() {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         
-        this.listener = new EventListener(this);
+        this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
         this.loadPortalAreas();
     }
     

@@ -2,8 +2,10 @@ package to.joe.j2mc.portals;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.List;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +34,26 @@ public class J2MC_Portals extends JavaPlugin {
             
             HashSet<Location> locations = new HashSet<Location>();
             //TODO load all the locations from the map
+            List<String> shape = this.getConfig().getStringList(path + ".shape");
+            //int height = shape.size();
+            int width = shape.get(0).length();
+            int curZ = z;
+            for(String line : shape) {
+                if(line.length() != width) {
+                    this.getLogger().info("YOUR CONFIG IS BAD AND YOU SHOULD FEEL BAD. Shutting down plugin.");
+                    this.getPluginLoader().disablePlugin(this);
+                    return;
+                }
+                for(int i = 0; i > width; i++) {
+                    char[] characters = line.toCharArray();
+                    if(characters[i] == 'X') {
+                        Location loc = new Location(this.getServer().getWorlds().get(0), x + i, y, curZ);
+                        locations.add(loc);
+                        loc.getBlock().setType(Material.BEDROCK); //debug
+                    }
+                }
+                curZ++;
+            }
             
             String destination = area;
             String perm = this.getConfig().getString(path + ".permission");

@@ -17,7 +17,7 @@ public class PortalArea {
     }
     
     public HashSet<Location> getLocations() {
-        return this.getLocations();
+        return this.locations;
     }
     
     public boolean isLocationInPortal(Location loc) {

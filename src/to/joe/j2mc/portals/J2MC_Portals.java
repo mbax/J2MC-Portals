@@ -45,8 +45,7 @@ public class J2MC_Portals extends JavaPlugin {
                     return;
                 }
                 for(int i = 0; i > width; i++) {
-                    char[] characters = line.toCharArray();
-                    if(characters[i] == 'X') {
+                    if(line.charAt(i) == 'X') {
                         Location loc = new Location(this.getServer().getWorlds().get(0), x + i, y, curZ);
                         locations.add(loc);
                         loc.getBlock().setType(Material.BEDROCK); //debug

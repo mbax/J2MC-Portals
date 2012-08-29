@@ -1,21 +1,35 @@
 package to.joe.j2mc.portals;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.Location;
 
 public class PortalArea {
     
-    public ArrayList<Location> locations;
-    public String destination;
-    public String permission;
-    public Location upperLeft;
+    private HashSet<Location> locations;
+    private String destination;
+    private String permission;
     
-    public PortalArea(ArrayList<Location> locations_, String destination_, String perm, Location upperLeft_) {
-        this.locations = locations_;
-        this.destination = destination_;
-        this.permission = perm;
-        this.upperLeft = upperLeft_;
+    public PortalArea(HashSet<Location> locations, String destination, String permission, Location upperLeft) {
+        this.locations = locations;
+        this.destination = destination;
+        this.permission = permission;
+    }
+    
+    public HashSet<Location> getLocations() {
+        return this.getLocations();
+    }
+    
+    public boolean isLocationInPortal(Location loc) {
+        return locations.contains(loc);
+    }
+    
+    public String getDestination(){
+        return this.destination;
+    }
+    
+    public String getPermission(){
+        return this.permission;
     }
 
 }

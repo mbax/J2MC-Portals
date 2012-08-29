@@ -1,21 +1,24 @@
 package to.joe.j2mc.portals;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.util.HashSet;
 
 import org.bukkit.Location;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class J2MC_Portals extends JavaPlugin {
 
-    public EventListener listener;
-    public ArrayList<PortalArea> portalAreas;
+    public final HashSet<PortalArea> portalAreas = new HashSet<PortalArea>();
 
     @Override
     public void onEnable() {
-        this.getConfig().options().copyDefaults(true);
-        this.saveConfig();
+        if(!(new File(this.getDataFolder(),"config.yml")).exists()){
+            this.saveDefaultConfig();
+        }
         
-        this.listener = new EventListener(this);
+        this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
         this.loadPortalAreas();
     }
     
@@ -27,20 +30,32 @@ public class J2MC_Portals extends JavaPlugin {
             int z = this.getConfig().getInt(path + ".z");
             Location upperLeft = new Location(this.getServer().getWorlds().get(0), x, y, z);
             
-            ArrayList<Location> locations = new ArrayList<Location>();
+            HashSet<Location> locations = new HashSet<Location>();
             //TODO load all the locations from the map
             
             String destination = area;
             String perm = this.getConfig().getString(path + ".permission");
+            if(perm.equals("j2mc.portals.everyone")) {
+                this.getServer().getPluginManager().addPermission(new Permission("perm",PermissionDefault.OP));
+            }
             
             this.portalAreas.add(new PortalArea(locations, destination, perm, upperLeft));
         }
     }
     
-    public ArrayList<Location> getAllLocations() {
-        ArrayList<Location> return_ = new ArrayList<Location>();
+    public PortalArea getPortalForLocation(Location loc) {
+        for(PortalArea area : this.portalAreas){
+            if(area.isLocationInPortal(loc)){
+                return area;
+            }
+        }
+        return null;
+    }
+    
+    public HashSet<Location> getAllLocations() {
+        HashSet<Location> return_ = new HashSet<Location>();
         for(PortalArea area : this.portalAreas) {
-            for(Location loc : area.locations) {
+            for(Location loc : area.getLocations()) {
                 return_.add(loc);
             }
         }

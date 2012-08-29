@@ -1,3 +1,8 @@
 name: Portals
-author: The J2 dev team
-version: very early
+website: http://forums.joe.to
+author: J2 Minecraft Plugin Team
+version: 1.0-SNAPSHOT
+permissions:
+  j2mc.portals.everyone:
+    description: Yes for everyone
+    default: true

@@ -26,14 +26,13 @@ public class J2MC_Portals extends JavaPlugin {
     
     public void loadPortalAreas() {
         for(String area : this.getConfig().getStringList("portals")) {
-            String path = "portals." + area;
+            String path = /*"portals." + */area;
             int x = this.getConfig().getInt(path + ".x");
             int y = this.getConfig().getInt(path + ".y");
             int z = this.getConfig().getInt(path + ".z");
             Location upperLeft = new Location(this.getServer().getWorlds().get(0), x, y, z);
             
             HashSet<Location> locations = new HashSet<Location>();
-            //TODO load all the locations from the map
             List<String> shape = this.getConfig().getStringList(path + ".shape");
             //int height = shape.size();
             int width = shape.get(0).length();
@@ -44,11 +43,12 @@ public class J2MC_Portals extends JavaPlugin {
                     this.getPluginLoader().disablePlugin(this);
                     return;
                 }
-                for(int i = 0; i > width; i++) {
+                for(int i = 0; i < width; i++) {
                     if(line.charAt(i) == 'X') {
                         Location loc = new Location(this.getServer().getWorlds().get(0), x + i, y, curZ);
                         locations.add(loc);
                         loc.getBlock().setType(Material.BEDROCK); //debug
+                        this.getLogger().info("Placed bedrock at " + loc.getX() + " " + loc.getBlockY() + " " + loc.getZ());
                     }
                 }
                 curZ++;

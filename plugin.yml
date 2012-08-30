@@ -1,4 +1,5 @@
 name: Portals
+main: to.joe.j2mc.portals.J2MC_Portals
 website: http://forums.joe.to
 author: J2 Minecraft Plugin Team
 version: 1.0-SNAPSHOT

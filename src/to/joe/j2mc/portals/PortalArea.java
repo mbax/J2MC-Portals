@@ -3,6 +3,7 @@ package to.joe.j2mc.portals;
 import java.util.HashSet;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class PortalArea {
     
@@ -22,6 +23,16 @@ public class PortalArea {
     
     public boolean isLocationInPortal(Location loc) {
         return locations.contains(new Location(loc.getWorld(), loc.getBlockX(),loc.getBlockY(), loc.getBlockZ()));
+    }
+    
+    public boolean isPlayerInPortal(Player player) {
+        Location loc = player.getLocation();
+        Location test = new Location(loc.getWorld(), loc.getBlockX(),loc.getBlockY(), loc.getBlockZ());
+        if(locations.contains(test)){
+            return true;
+        }
+        test.add(0, 1, 0);
+        return locations.contains(test);
     }
     
     public String getDestination(){

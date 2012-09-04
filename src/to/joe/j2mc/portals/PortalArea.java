@@ -21,16 +21,15 @@ public class PortalArea {
     }
     
     public boolean isLocationInPortal(Location loc) {
-        boolean r = false;
         int x = loc.getBlockX();
         int y = loc.getBlockY();
         int z = loc.getBlockY();
         for(Location l : locations) {
             if(l.getBlockX() == x && l.getBlockZ() == z && ((l.getBlockY() == y) || (l.getBlockY() == y+1) || l.getBlockY() == y+2)) {
-                r = true;
+                return true;
             }
         }
-        return r;
+        return false;
     }
     
     public String getDestination(){

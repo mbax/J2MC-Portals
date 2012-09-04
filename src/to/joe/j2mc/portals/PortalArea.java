@@ -21,15 +21,7 @@ public class PortalArea {
     }
     
     public boolean isLocationInPortal(Location loc) {
-        int x = loc.getBlockX();
-        int y = loc.getBlockY();
-        int z = loc.getBlockY();
-        for(Location l : locations) {
-            if(l.getBlockX() == x && l.getBlockZ() == z && ((l.getBlockY() == y) || (l.getBlockY() == y+1) || l.getBlockY() == y+2)) {
-                return true;
-            }
-        }
-        return false;
+        return locations.contains(new Location(loc.getWorld(), loc.getBlockX(),loc.getBlockY(), loc.getBlockZ()));
     }
     
     public String getDestination(){
